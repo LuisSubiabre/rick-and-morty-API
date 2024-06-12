@@ -3,18 +3,22 @@
     v-if="show"
     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
   >
-    <div class="bg-white p-4 rounded-md w-1/2">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold">{{ card.title }}</h2>
-        <button @click="close" class="text-red-500">X</button>
+    <div class="flex flex-col justify-center items-center bg-white p-4 rounded-md w-96">
+      <div class="mb-4">
+        <h2 class="text-lime-800 text-xl font-semibold">{{ card.title }}</h2>
+        
       </div>
       <img
         :src="card.imageUrl"
         alt="Card image"
-        class="w-full h-28 object-cover mb-4 rounded-md"
+        class="size-48 object-cover mb-4 rounded-full "
       />
-      <p>{{ card.description }}</p>
-    </div>
+      <span class="text-lime-800">Specie: {{ card.description }}</span>
+      <span class="text-lime-800" v-if="card.status ==='Alive'">Status: {{ card.status }} 🟢</span>
+        <span class="text-lime-800" v-else-if="card.status ==='Dead'">Status: {{ card.status }} 🔴</span>
+        <span class="text-lime-800" v-else>Status: {{ card.status }} ⚪️</span> <!-- Default icon for other statuses -->
+      <button @click="close" class="mt-4 bg-lime-500 hover:bg-lime-600 text-white px-4 py-2 rounded-md">Cerrar</button>
+    </div><
   </div>
 </template>
 

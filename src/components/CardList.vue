@@ -62,7 +62,9 @@ export default {
           id: character.id,
           imageUrl: character.image,
           title: character.name,
-          description: character.species
+          description: character.species,
+          status: character.status,
+          location: character.location.name
         }));
         this.updateDisplayedCards(); // Inicializa la lista de tarjetas mostradas
       })
