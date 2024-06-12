@@ -1,26 +1,30 @@
 <template>
   <Search @search="onSearch" />
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-    <Card v-for="(card, index) in displayedCards" :key="index" :card="card" />
+    <Card v-for="(card, index) in displayedCards" :key="index" :card="card" @view-more="showModal" />
   </div>
+    <Modal v-if="selectedCard" :show="isModalVisible" :card="selectedCard" @close="hideModal" />
 </template>
 
 <script>
 import Card from './Card.vue';
 import Search from './Search.vue';
-
+import Modal from './Modal.vue'
 
 export default {
   name: 'CardList',
   components: {
     Card,
-    Search
+    Search,
+    Modal
   },
   data() {
     return {
       cards: [],
       searchTerm: '',
-      displayedCards: [] // Nueva propiedad de datos
+      displayedCards: [],
+      isModalVisible: false,
+      selectedCard: null
     };
   },
   computed: {
@@ -38,6 +42,14 @@ export default {
     },
     updateDisplayedCards() {
       this.displayedCards = this.filteredCards;
+    },
+    showModal(card) {
+      this.selectedCard = card;
+      this.isModalVisible = true;
+    },
+    hideModal(){
+      this.isModalVisible = false;
+      this.selectedCard = null;
     }
   },
   mounted() {
